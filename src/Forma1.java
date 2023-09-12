@@ -22,7 +22,7 @@ public class Forma1 {
 
     //[==========( Methods )==========]
 
-    // redimencionar
+    // REDIMENSIONAR
     public void resize() {
         
         if (vec.length == du) return;
@@ -42,7 +42,7 @@ public class Forma1 {
 
     }
 
-    // ajustar
+    // AJUSTAR
     public void adjust() {
         if (vec[1] == 0) {
             int i = 2; 
@@ -65,7 +65,7 @@ public class Forma1 {
         }
     }
 
-    // addition
+    // SUMA
     public void addition(int[] vecf1) {
 
         int[] A; // mayor
@@ -78,6 +78,7 @@ public class Forma1 {
         C[0] = A[0];
 
         int i = 1, j = 1, Me, me, sum = 0;
+        
         while (i <= A.length-1) {
             sum = 0;
 
@@ -100,11 +101,12 @@ public class Forma1 {
         resize();
         adjust();
     }
+
     public void addition(Forma1 vecf1){
         addition(vecf1.getVec());
     }
 
-    // substract
+    // RESTA
     public void substract(int[] vecf1) {
         int[] tmp = new int[vecf1.length];
         tmp[0] = vecf1[0];
@@ -113,11 +115,12 @@ public class Forma1 {
         }
         addition(tmp);
     }
+
     public void substract(Forma1 vecf1){
         substract(vecf1.getVec());
     }
 
-    // multiply
+    // MULTIPLICACION
     public void multiply(int[] vecf1) {
 
         // x^2 * x^3 == x^5 
@@ -141,6 +144,7 @@ public class Forma1 {
         vec = C;
         du = duC;
     }
+
     public void multiply(Forma1 vecf1) {
         multiply(vecf1.getVec());
     }
@@ -168,6 +172,7 @@ public class Forma1 {
     }
 
     //[==========(getters and setters)==========]
+
     public int getDu() {
         return du;
     }

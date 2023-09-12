@@ -6,7 +6,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         // petaopeta
-        String polinomio = "-3x^6-32x^5+4-23x^7-4x^3+18x^2-x+x-43-2-23";  
+        String polinomio = "2x^6-32x^5+4+0x^7-4x^3+18x^2-x+x-43-2-23";  
         //String polinomio = "x+2";
         //String polinomio = "5x^7+3x^4+2x^2+8";
 
@@ -30,15 +30,13 @@ public class App {
         }
 
         Forma2 f2 = new Forma2(ceVec);
-        System.out.println("origuinal -> "+ f2.showVec());
-        f2.adjust();
+        System.out.println("original -> "+ f2.showVec());
+        f2.addition(ceVec);
 
-        System.out.println("adjusted -> "+ f2.showVec());
+        System.out.println("additioned -> "+ f2.showVec());
 
-        
+    } 
 
-} 
-// 
     public static String[] fixVec(String[] vec) {
         int index=0, sum=0;
 
@@ -191,7 +189,6 @@ public class App {
     public static String menu() {
         return """
                 \n ------> Mega menu!
-
                 1.
                 2.
                 3.
