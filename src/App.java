@@ -5,37 +5,55 @@ import java.util.Arrays;
 public class App {
     public static void main(String[] args) throws Exception {
 
-        // petaopeta
-        String polinomio = "2x^6-32x^5+4+0x^7-4x^3+18x^2-x+x-43-2-23";  
-        //String polinomio = "x+2";
-        //String polinomio = "5x^7+3x^4+2x^2+8";
+        String polinomio = "2x^6-32x^5+4+2x^4-4x^3+18x^2+x+x-43-2-23";  
+        String polinomio2 = "x+2";
+        //String polinomio2 = "5x^7+3x^4-18x^2+8";
+       
+        // Forma1 f1 = new Forma1(ceVec, mayor);
+        // System.out.println("original -> "+ f1.showVec());
+        // f1.addition(f1.getVec());
+        // System.out.println("additioned -> "+ f1.showVec());
 
-        String[] VecS = ingreso(polinomio);
-        System.out.println("ingreso -> "+Arrays.asList(VecS));
-        
-        VecS = fixVec(VecS);
-        System.out.println("fixed -> "+Arrays.asList(VecS));
 
-        int[] ceVec = new int[VecS.length];
-
-        // convert to int
-        for (int i = 0; i < VecS.length; i++) {
-            ceVec[i] = Integer.parseInt(VecS[i]);
-        }
-
-        // get max
-        int mayor = 0;
-        for (int i = 1; i < ceVec.length; i+=2) {
-            if (ceVec[i] > mayor) mayor = ceVec[i];     
-        }
+        int[] ceVec = convertToCeVec(polinomio);
+        int[] ceVec2 = convertToCeVec(polinomio2);
 
         Forma2 f2 = new Forma2(ceVec);
-        System.out.println("original -> "+ f2.showVec());
-        f2.addition(ceVec);
+        System.out.println("\nVec 1     -> \t"+ f2.showVec());
 
-        System.out.println("additioned -> "+ f2.showVec());
+        Forma2 f22 = new Forma2(ceVec2);
+        System.out.println("Vec 2     -> \t"+ f22.showVec());
+
+        f2.multiply(f22.getVec());
+
+        System.out.println("\nresult    = \t"+ f2.showVec());
+
+        
 
     } 
+
+    public static int[] convertToCeVec(String polinomio) {
+        String[] StringVec = ingreso(polinomio);
+        StringVec = fixVec(StringVec);
+
+        // convert to int
+        int[] integerCeVec = new int[StringVec.length];
+        for (int i = 0; i < StringVec.length; i++) {
+            integerCeVec[i] = Integer.parseInt(StringVec[i]);
+        }
+
+        return integerCeVec;
+    }
+
+    public static int getMaxExp(int[] vec) {
+        // get max exponet
+        int max = 0;
+        for (int i = 1; i < vec.length; i+=2) {
+            if (vec[i] > max) max = vec[i];     
+        }   
+
+        return max;
+    }
 
     public static String[] fixVec(String[] vec) {
         int index=0, sum=0;
