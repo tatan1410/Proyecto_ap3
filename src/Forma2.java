@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Vector;
 
 public class Forma2 {
     int du, vec[];
@@ -8,13 +9,13 @@ public class Forma2 {
     //[nTerminos,coeficiente,exponente...]
 
     public Forma2(int[] ceVec) {
-        vec = new int[(ceVec.length+1)];
+        vec = new int[(ceVec.length + 1)];
         vec[0] = ceVec.length/2;
 
         du = vec[0]*2; // [0] = nterminos -> [+0] co, ex
 
         for (int i = 0; i < ceVec.length; i++) {
-            vec[i+1] = ceVec[i];
+            vec[i + 1] = ceVec[i];
         }
     }
 
@@ -109,6 +110,7 @@ public class Forma2 {
         vec = C;
         resize();
     }
+
     public void addition(Forma1 vecf2) {
         addition(vecf2.getVec());
     }
@@ -117,45 +119,71 @@ public class Forma2 {
     public void substract(int[] vecf2) {
         int[] tmp = new int[vecf2.length];
         tmp[0] = vecf2[0];
+
         for (int i = 1; i < vecf2.length; i++) {
             if (i % 2 == 1) tmp[i] = vecf2[i]*(-1);
             else tmp[i] = vecf2[i];
         }
         addition(tmp);
     }
+
     public void substract(Forma2 f2) {
         substract(f2.getVec());
     }
 
     // multiply
     public void multiply(int[] vecf2) {
-                // x^2 * x^3 == x^5 
-                int[] C = new int[(vecf2[2] + this.vec[2])*2];
-                
-                
-                int i=2,j,k=2; 
-                while (i < du/2+1) {
-                    j=2;
-                    while(j<vecf2.length) {
-                        
-                        C[k] = vecf2[j-1]+vec[i-1];
-                        C[k-1] += vecf2[j]*vec[i];
+        // x^2 * x^3 == x^5
+        int[] C = new int[((vecf2[0] * this.vec[0]) * 2) + 1];        
+        int i = 1, j = 1, k = 1;
 
-                        j+=2;
-                        k+=2;
-                    }
-                    i+=2;
+        System.out.println(this.vec.length);
+        System.out.println(vecf2.length);
+
+        while (i < this.vec.length) {
+            j = 1;
+            while (j < vecf2.length) {
+
+                        C[k] = this.vec[i] * vecf2[j];
+                        C[k+1] = vecf2[j+1] + vec[i+1];
+                k += 2;
+                j += 2;
+            }
+            i += 2;
+        }
+        
+        C[0] = vecf2[0] * this.vec[0];
+
+        String blacklist = "";
+
+        int [] auxVec = new int[C.length];
+        for (int z = 2; z < C.length; z+=2) {
+            if (!blacklist.contains(C[z] + ", ")) {
+                auxVec[z-1] += C[z-1];
+                auxVec[z] = C[z]; 
+            } else {
+
+                z = z-2;
+            }
+            for (int y = z; y < C.length; y+=2) {
+                if ((C[z] == C[y]) && (z < y)) {
+                    auxVec[z-1] += C[y-1]; 
                 }
-                
-                C[0] = vecf2[2] + this.vec[2];
-                int duC = C[0] + 1;
-                vec = C;
-                du = duC;
+
+            }
+            
+            blacklist += C[z] + ", ";
+        }
+
+
+        int duC = auxVec.length + 1;
+        vec = auxVec;
+        du = duC;
     }
+
     public void multiply(Forma2 f2) {
         multiply(f2.getVec());
     }
-
 
     // evaluate
 

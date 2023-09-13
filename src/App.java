@@ -5,7 +5,9 @@ import java.util.Arrays;
 public class App {
     public static void main(String[] args) throws Exception {
 
-        String polinomio = "2x^6-32x^5+4+2x^4-4x^3+18x^2+x+x-43-2-23";  
+        // String polinomio = "2x^6-32x^5+4+2x^4-4x^3+18x^2+x+x-43-2-23";  
+        // String polinomio2 = "x+2";
+        String polinomio = "18x^2+x+x-43-2-23";  
         String polinomio2 = "x+2";
         //String polinomio2 = "5x^7+3x^4-18x^2+8";
        
@@ -27,9 +29,6 @@ public class App {
         f2.multiply(f22.getVec());
 
         System.out.println("\nresult    = \t"+ f2.showVec());
-
-        
-
     } 
 
     public static int[] convertToCeVec(String polinomio) {
@@ -205,13 +204,14 @@ public class App {
     }
 
     public static String menu() {
-        return """
-                \n ------> Mega menu!
-                1.
-                2.
-                3.
-                4.
-                Opt:  """;
+        return "";
+        // return """
+        //         \n ------> Mega menu!
+        //         1.
+        //         2.
+        //         3.
+        //         4.
+        //         Opt:  """;
     }
 }
 
