@@ -62,8 +62,6 @@ public class Forma2 {
             vec = tempVec;
             du = vec[0] + 1;
         }
-        
-
         resize();
     }
 
@@ -110,7 +108,6 @@ public class Forma2 {
         vec = C;
         resize();
     }
-
     public void addition(Forma1 vecf2) {
         addition(vecf2.getVec());
     }
@@ -126,7 +123,6 @@ public class Forma2 {
         }
         addition(tmp);
     }
-
     public void substract(Forma2 f2) {
         substract(f2.getVec());
     }
@@ -137,17 +133,13 @@ public class Forma2 {
         int[] C = new int[((vecf2[0] * this.vec[0]) * 2) + 1];        
         int i = 1, j = 1, k = 1;
 
-        System.out.println(this.vec.length);
-        System.out.println(vecf2.length);
-
         while (i < this.vec.length) {
             j = 1;
             while (j < vecf2.length) {
 
-                        C[k] = this.vec[i] * vecf2[j];
-                        C[k+1] = vecf2[j+1] + vec[i+1];
-                k += 2;
-                j += 2;
+                C[k] = this.vec[i] * vecf2[j];
+                C[k+1] = vecf2[j+1] + vec[i+1];
+                k += 2; j += 2;
             }
             i += 2;
         }
@@ -158,13 +150,15 @@ public class Forma2 {
 
         int [] auxVec = new int[C.length];
         for (int z = 2; z < C.length; z+=2) {
-            if (!blacklist.contains(C[z] + ", ")) {
-                auxVec[z-1] += C[z-1];
-                auxVec[z] = C[z]; 
-            } else {
-
-                z = z-2;
+            if (blacklist.contains(C[z] + ",")) {
+                auxVec[z] = -1;
+                auxVec[z-1] = 0;
+                continue;
             }
+            
+            auxVec[z-1] += C[z-1];
+            auxVec[z] = C[z];
+
             for (int y = z; y < C.length; y+=2) {
                 if ((C[z] == C[y]) && (z < y)) {
                     auxVec[z-1] += C[y-1]; 
@@ -175,17 +169,43 @@ public class Forma2 {
             blacklist += C[z] + ", ";
         }
 
+        int usableData = 0;
+        for (int l = 2; l<auxVec.length; l+=2) {
+            if (auxVec[l] != -1) usableData++;
+        }
 
-        int duC = auxVec.length + 1;
-        vec = auxVec;
-        du = duC;
+        int[] tempVec = new int[usableData*2+1];
+        int c = 2;
+        for (int l = 2; l < auxVec.length; l+=2) {
+            if (auxVec[l] != -1) {
+                tempVec[c] = auxVec[l]; 
+                tempVec[c-1] = auxVec[l-1];
+                c+=2;
+            }
+        }
+
+        vec = tempVec;
+        vec[0] = (tempVec.length-1)/2;
+        du = (tempVec.length-1);
+
+        sort();
     }
-
     public void multiply(Forma2 f2) {
         multiply(f2.getVec());
     }
 
     // evaluate
+    public int evaluate(int x) {
+        int res = 0;
+        
+        int i = 2;
+        while (i <= du) {
+            res += getVecPos(i-1)*(Math.pow(x, getVecPos(i)));
+            i+=2;
+        }
+
+        return res;
+    }
 
 
     //[==========( Utility )==========]
@@ -196,6 +216,27 @@ public class Forma2 {
         }
         s += " ]";
         return s;
+    }
+
+    public void sort() {
+        // bubble sort
+        int tmpCoe,tmpExp;
+        for (int j = 2; j < vec.length; j+=2) {
+
+            for (int k = 2; k < vec.length-2; k+=2) {
+                if(vec[k] < vec[k+2]) {
+
+                    tmpExp = vec[k+2]; //siguiente
+                    tmpCoe = vec[k+1];
+
+                    vec[k+2] = vec[k]; // siguiente -> actual
+                    vec[k+1] = vec[k-1];
+
+                    vec[k] = tmpExp; // actual -> siguiente
+                    vec[k-1] = tmpCoe;
+                }
+            }
+        }
     }
 
     //[==========(getters and setters)==========]
