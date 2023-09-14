@@ -160,6 +160,54 @@ public class Forma1 {
        return res;
     }
 
+    // Agregar terminos
+    public void addTerms(int coe, int exp) {
+
+        if (exp > vec[0]) {
+            int[] vectorNuevo = new int[exp+2];
+            int duNuevo = exp+1;
+
+            vectorNuevo[0] = exp;
+            vectorNuevo[1] = coe;
+
+            int auxCoe, pos;
+            for (int i = 1; i < vec.length; i++) {
+                auxCoe = vec[i];
+                pos = duNuevo - (du-i);
+
+                vectorNuevo[pos] = auxCoe;
+            }
+
+            vec = vectorNuevo;
+            du = duNuevo;
+
+        } else {
+
+            if (vec[du-exp] == 0) {
+                vec[du-exp] += coe;
+            }
+        }
+    }
+
+    // Eliminar terminos
+
+    public void deleteTerms(int exp) {
+        // EXP = DU - POS
+        if (exp <= vec[0]) {
+        
+            for (int i = 1; i < vec.length; i++) {
+                if (exp == (du - i)) {
+                    vec[i] = 0;
+                }
+            }
+            adjust();
+        
+        } else {
+            System.out.println("El término no existe en el polinomio");
+        }
+    }
+
+
     //[==========( Utility )==========]
 
     public String showVec() {

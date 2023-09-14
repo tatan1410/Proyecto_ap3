@@ -207,6 +207,67 @@ public class Forma2 {
         return res;
     }
 
+    // agregar terminos
+
+    public void addTerms(int coe, int exp) {
+
+        // |3| 1|4|32|2|12|1|
+
+        for (int i = 1; i < vec.length; i+=2) {
+            if (exp == vec[i+1]) {
+                System.out.println("Este termino ya existe");
+                return;
+            } 
+        }
+
+        int j = 2;
+
+        int[] newVec = new int[vec.length + 2];
+        newVec[0] = vec[0] + 1;
+
+        newVec[newVec.length-1] = exp;
+        newVec[newVec.length-2] = coe;
+
+        for (int i = 1; i < vec.length; i++) {
+            newVec[i] = vec[i];
+        }
+
+        vec = newVec;
+        du+=2;
+        sort();;
+    }
+
+    // eliminar terminos
+    public void deleteTerms(int exp) {
+        for (int i = 1; i < vec.length; i+=2) {
+            if (exp == vec[i+1]) {
+                du = (vec[0]-1)*2;
+                vec[i+1] = -1;
+
+                int[] newVec = new int[vec.length-2];
+                newVec[0] = vec[0]-1;
+
+                int j = 2, k = 2;
+                while (j <= du) {
+                    if (vec[k] != -1) {
+                        newVec[j] = vec[k];
+                        newVec[j-1] = vec[k-1];
+                        j+=2; k+=2;
+                    } else {
+                        k+=2;
+                    }
+                }
+
+                vec = newVec;
+
+
+                return;
+            } 
+        }
+    }
+
+
+
 
     //[==========( Utility )==========]
     public String showVec() {

@@ -7,8 +7,8 @@ public class App {
 
         // String polinomio = "2x^6-32x^5+4+2x^4-4x^3+18x^2+x+x-43-2-23";  
         // String polinomio2 = "x+2";
-        String polinomio = "18x^2+x+x-43-2-23";  
-        String polinomio2 = "x^2+2";
+        String polinomio = "18x^3+x+x-43-2-23";  
+        String polinomio2 = "x^2";
         //String polinomio2 = "5x^7+3x^4-18x^2+8";
        
         // Forma1 f1 = new Forma1(ceVec, mayor);
@@ -20,20 +20,23 @@ public class App {
         int[] ceVec2 = convertToCeVec(polinomio2);
         int[] ceVec = convertToCeVec(polinomio);
 
+        // Forma2 f2 = new Forma2(ceVec);
+        // System.out.println("\nVec 1     -> \t"+ f2.showVec());
+
+        // Forma2 f22 = new Forma2(ceVec2);
+        // System.out.println("Vec 2     -> \t"+ f22.showVec());
+
         Forma2 f2 = new Forma2(ceVec);
-        System.out.println("\nVec 1     -> \t"+ f2.showVec());
+        System.out.println("Vec 2     -> \t"+ f2.showVec());
 
-        Forma2 f22 = new Forma2(ceVec2);
-        System.out.println("Vec 2     -> \t"+ f22.showVec());
-
-        f2.multiply(f22.getVec());
+        f2.addition(ceVec2);
 
         System.out.println("\nresult    = \t"+ f2.showVec());
 
-        System.out.println("\nevaluate    = \t"+ f2.evaluate(1));
+        // System.out.println("\nevaluate    = \t"+ f2.evaluate(1));
 
-        Forma3 f3 = new Forma3(ceVec);
-        System.out.println(f3.showList());
+        // Forma3 f3 = new Forma3(ceVec);
+        // System.out.println(f3.showList());
 
 
     } 
@@ -77,7 +80,7 @@ public class App {
                 continue;
             }  
             
-            System.out.println(Arrays.asList(vec));
+            // System.out.println("vec " + Arrays.asList(vec));
 
             index = i;
             sum = Integer.parseInt(vec[i-1]);
@@ -161,7 +164,7 @@ public class App {
             a++;
         }
 
-        System.out.println(Arrays.asList(terminos));
+        // System.out.println(Arrays.asList(terminos));
 
         String coeficiente = "", exponente = "";
         String[] aux;
@@ -179,7 +182,7 @@ public class App {
                     if (aux[0] == "+" || aux[0] == "-" ) {
                         coeficiente = aux[0] == "-" ? "1":"-1";
                     } else {
-                        coeficiente = aux[0] != "" ? aux[0] : "1";
+                        coeficiente = aux[0].equals("") ? "1" : aux[0];
                     }
                     
                     exponente = aux[1];

@@ -11,6 +11,20 @@ public class Forma3 {
         }
     }
 
+    // ==================== Methods ==================
+
+    public void addition(Node punta2) {
+        Node p = Punta, r = punta2;
+        if (punta2.getExp() == Punta.getExp()) {
+            while (true) {
+
+            }
+        }
+    }
+
+
+
+    // =========== utility ===============
     public String appendToStart(int c, int e) { // append to the Punta of the list
         Node newNode = new Node(c,e);
         if (isEmpty()) {
@@ -19,7 +33,7 @@ public class Forma3 {
             newNode.setLiga(Punta);
             Punta = newNode;
         }
-        return "the number "+c+e+" was added at the Punta";
+        return "the number "+c+e+" was added at the start";
     }
 
 
