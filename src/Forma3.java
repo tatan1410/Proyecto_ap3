@@ -16,9 +16,46 @@ public class Forma3 {
     // ==================== Methods ==================
 
     // addTerms
+    public boolean addTerms(int coe, int exp) {
+
+        Node p = Punta;
+        while (p != null) {
+            if (p.getExp() == exp) return false;
+            p = p.getLiga();
+        }
+        if (exp > Punta.getExp()) {
+            appendToStart(coe, exp);
+        } else appendSort(coe, exp);
+        return true;
+    }
 
     // deleteTerms
-    
+
+    public boolean deleteTerms(int exp) {
+        Node p = Punta, y=null;
+        while (p != null) {
+
+            if (p.getExp() == exp) {
+                if (p == Punta) {
+                    Punta = p.getLiga();
+                    p.setLiga(null);
+
+                } else {
+                    y.setLiga(p.getLiga());
+                    p.setLiga(null);
+                }
+
+                return true;
+            }
+
+
+            y = p;
+            p = p.getLiga();
+        }
+
+        return false;
+    }
+
     // addition
     public void addition(Forma3 list) {
         Node A,B;
@@ -113,16 +150,16 @@ public class Forma3 {
     }
 
     public void appendSort(int c, int e) {
-        Node p = Punta, y = null;
+        Node p = Punta, y = p;
         Node x = new Node(c,e);
 
-        while (p != null && p.getExp() < x.getExp()) {
+        while (p != null && p.getExp() > x.getExp()) {
             y = p;
             p = p.getLiga();
         }
 
-        y.setLiga(x);
-        x.setLiga(p);
+        y.setLiga(p);
+        x.setLiga(y);
 
     }
 

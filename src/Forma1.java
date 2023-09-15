@@ -155,7 +155,7 @@ public class Forma1 {
     }
 
     // Agregar terminos
-    public void addTerms(int coe, int exp) {
+    public boolean addTerms(int coe, int exp) {
 
         if (exp > vec[0]) {
             int[] vectorNuevo = new int[exp+2];
@@ -174,18 +174,21 @@ public class Forma1 {
 
             vec = vectorNuevo;
             du = duNuevo;
+            return true;
 
         } else {
 
             if (vec[du-exp] == 0) {
                 vec[du-exp] += coe;
             }
+
+            return false;
         }
     }
 
     // Eliminar terminos
 
-    public void deleteTerms(int exp) {
+    public boolean deleteTerms(int exp) {
         // EXP = DU - POS
         if (exp <= vec[0]) {
         
@@ -195,10 +198,10 @@ public class Forma1 {
                 }
             }
             adjust();
+            return true;
         
-        } else {
-            System.out.println("El término no existe en el polinomio");
         }
+        return false;
     }
 
 
