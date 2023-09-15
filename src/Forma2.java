@@ -1,6 +1,3 @@
-import java.util.Arrays;
-import java.util.Vector;
-
 public class Forma2 {
     int du, vec[];
 
@@ -17,6 +14,11 @@ public class Forma2 {
         for (int i = 0; i < ceVec.length; i++) {
             vec[i + 1] = ceVec[i];
         }
+    }
+
+    public Forma2(int length) {
+        du = 0;
+        vec = new int[length];
     }
 
     //[==========( Methods )==========]
@@ -66,15 +68,16 @@ public class Forma2 {
     }
 
     // addition
-    public void addition(int[] vecf2) {
+    public void addition(Forma2 vecf2) {
 
         int[] A = getVec();
-        int[] B = vecf2; 
+        int[] B = vecf2.getVec(); 
         int[] C = new int[A.length + B.length];
 
         int i = 1, j = 1, k = 1;
         
         while (i <= A.length-1) {
+            j = 1;
             while (j <= B.length-1) {
                 if (A[i+1] == B[j+1]) {
                     if ((A[i] + B[j]) != 0) {
@@ -84,22 +87,16 @@ public class Forma2 {
                     } else {
                         i += 2; j += 2;
                     }
-                } else if (A[i+1] >= B[j+1]) {
-                    if ((A[i] + B[j]) != 0) {
-                        C[k] = A[i];
-                        C[k+1] = A[i+1];
-                        k += 2; i += 2;
-                    } else {
-                        i += 2;
-                    }
-                } else if (A[i+1] <= B[j+1]) {
-                    if ((A[i] + B[j]) != 0) {
-                        C[k] = B[j];
-                        C[k+1] = B[j+1];
-                        k += 2; j += 2;
-                    } else {
-                        j += 2;
-                    }
+                } else if (A[i+1] > B[j+1]) {
+                    C[k] = A[i];
+                    C[k+1] = A[i+1];
+                    k += 2; i += 2;
+
+                } else if (A[i+1] < B[j+1]) {
+                    C[k] = B[j];
+                    C[k+1] = B[j+1];
+                    k += 2; j += 2;
+
                 }
             }
         }
@@ -108,28 +105,23 @@ public class Forma2 {
         vec = C;
         resize();
     }
-    public void addition(Forma1 vecf2) {
-        addition(vecf2.getVec());
-    }
     
     // substract
-    public void substract(int[] vecf2) {
-        int[] tmp = new int[vecf2.length];
-        tmp[0] = vecf2[0];
+    public void substract(Forma2 vecf2) {
+        Forma2 tmp = new Forma2(vecf2.getVec().length);
+        tmp.setVecPos(0, vecf2.getVecPos(0));
 
-        for (int i = 1; i < vecf2.length; i++) {
-            if (i % 2 == 1) tmp[i] = vecf2[i]*(-1);
-            else tmp[i] = vecf2[i];
+        for (int i = 1; i < vecf2.getVec().length; i++) {
+            if (i % 2 == 1) tmp.setVecPos(i, vecf2.getVecPos(i)*(-1));
+            else tmp.setVecPos(i, vecf2.getVecPos(i));
         }
         addition(tmp);
     }
-    public void substract(Forma2 f2) {
-        substract(f2.getVec());
-    }
 
     // multiply
-    public void multiply(int[] vecf2) {
+    public void multiply(Forma2 f2) {
         // x^2 * x^3 == x^5
+        int[] vecf2 = f2.getVec();
         int[] C = new int[((vecf2[0] * this.vec[0]) * 2) + 1];        
         int i = 1, j = 1, k = 1;
 
@@ -190,83 +182,17 @@ public class Forma2 {
 
         sort();
     }
-    public void multiply(Forma2 f2) {
-        multiply(f2.getVec());
-    }
 
     // evaluate
     public int evaluate(int x) {
-        int res = 0;
-        
+        int res = 0;      
         int i = 2;
         while (i <= du) {
             res += getVecPos(i-1)*(Math.pow(x, getVecPos(i)));
             i+=2;
         }
-
         return res;
     }
-
-    // agregar terminos
-
-    public void addTerms(int coe, int exp) {
-
-        // |3| 1|4|32|2|12|1|
-
-        for (int i = 1; i < vec.length; i+=2) {
-            if (exp == vec[i+1]) {
-                System.out.println("Este termino ya existe");
-                return;
-            } 
-        }
-
-        int j = 2;
-
-        int[] newVec = new int[vec.length + 2];
-        newVec[0] = vec[0] + 1;
-
-        newVec[newVec.length-1] = exp;
-        newVec[newVec.length-2] = coe;
-
-        for (int i = 1; i < vec.length; i++) {
-            newVec[i] = vec[i];
-        }
-
-        vec = newVec;
-        du+=2;
-        sort();;
-    }
-
-    // eliminar terminos
-    public void deleteTerms(int exp) {
-        for (int i = 1; i < vec.length; i+=2) {
-            if (exp == vec[i+1]) {
-                du = (vec[0]-1)*2;
-                vec[i+1] = -1;
-
-                int[] newVec = new int[vec.length-2];
-                newVec[0] = vec[0]-1;
-
-                int j = 2, k = 2;
-                while (j <= du) {
-                    if (vec[k] != -1) {
-                        newVec[j] = vec[k];
-                        newVec[j-1] = vec[k-1];
-                        j+=2; k+=2;
-                    } else {
-                        k+=2;
-                    }
-                }
-
-                vec = newVec;
-
-
-                return;
-            } 
-        }
-    }
-
-
 
 
     //[==========( Utility )==========]
@@ -321,7 +247,7 @@ public class Forma2 {
         this.vec = vec;
     }
 
-     public void setVec(int i, int d) {
+     public void setVecPos(int i, int d) {
         this.vec[i] = d;
     }
 

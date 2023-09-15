@@ -66,10 +66,12 @@ public class Forma1 {
     }
 
     // SUMA
-    public void addition(int[] vecf1) {
+    public void addition(Forma1 f1) {
+
 
         int[] A; // mayor
         int[] B; // menor
+        int[] vecf1 = f1.getVec();
 
         A = ((vecf1[0] > this.vec[0]) ? vecf1  : this.vec) ;
         B = ((vecf1[0] > this.vec[0]) ? this.vec : vecf1);
@@ -102,26 +104,22 @@ public class Forma1 {
         adjust();
     }
 
-    public void addition(Forma1 vecf1){
-        addition(vecf1.getVec());
-    }
-
     // RESTA
-    public void substract(int[] vecf1) {
-        int[] tmp = new int[vecf1.length];
-        tmp[0] = vecf1[0];
+    public void substract(Forma1 f1) {
+        int[] vecf1 = f1.getVec();
+        Forma1 tmp = new Forma1(vecf1.length-1);
+        tmp.setVecPost(0, du = vecf1[0]);
         for (int i = 1; i < vecf1.length; i++) {
-            tmp[i] = vecf1[i]*(-1);
+            tmp.setVecPost(i,vecf1[i]*(-1));
         }
+        
         addition(tmp);
     }
 
-    public void substract(Forma1 vecf1){
-        substract(vecf1.getVec());
-    }
-
     // MULTIPLICACION
-    public void multiply(int[] vecf1) {
+    public void multiply(Forma1 f1) {
+
+        int[] vecf1 = f1.getVec();
 
         // x^2 * x^3 == x^5 
         int[] C = new int[vecf1[0] + this.vec[0] + 2];
@@ -145,10 +143,6 @@ public class Forma1 {
         du = duC;
     }
 
-    public void multiply(Forma1 vecf1) {
-        multiply(vecf1.getVec());
-    }
-    
     // evaluar
     public int evaluate(int x) {
         int res = 0;

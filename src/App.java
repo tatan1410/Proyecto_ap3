@@ -7,36 +7,47 @@ public class App {
 
         // String polinomio = "2x^6-32x^5+4+2x^4-4x^3+18x^2+x+x-43-2-23";  
         // String polinomio2 = "x+2";
-        String polinomio = "18x^3+x+x-43-2-23";  
-        String polinomio2 = "x^2";
+        String polinomio = "18x^3+2x-68";  
+        String polinomio2 = "x^2+4x+4";
         //String polinomio2 = "5x^7+3x^4-18x^2+8";
-       
-        // Forma1 f1 = new Forma1(ceVec, mayor);
-        // System.out.println("original -> "+ f1.showVec());
-        // f1.addition(f1.getVec());
-        // System.out.println("additioned -> "+ f1.showVec());
-
 
         int[] ceVec2 = convertToCeVec(polinomio2);
         int[] ceVec = convertToCeVec(polinomio);
+ 
+        // ========== Forma1 ==========
+        Forma1 f1 = new Forma1(ceVec, getMaxExp(ceVec));
+        Forma1 f12 = new Forma1(ceVec2, getMaxExp(ceVec2));
 
-        // Forma2 f2 = new Forma2(ceVec);
-        // System.out.println("\nVec 1     -> \t"+ f2.showVec());
+        System.out.println("F1 1 -> \t"+ f1.showVec());
+        System.out.println("F1 1 -> \t"+ f12.showVec());
 
-        // Forma2 f22 = new Forma2(ceVec2);
-        // System.out.println("Vec 2     -> \t"+ f22.showVec());
+        f1.multiply(f12);
+        System.out.println("\nResult -> \t"+ f1.showVec());
 
+
+        // ========== Forma2 ==========
         Forma2 f2 = new Forma2(ceVec);
-        System.out.println("Vec 2     -> \t"+ f2.showVec());
+        Forma2 f22 = new Forma2(ceVec2);
 
-        f2.addition(ceVec2);
+        System.out.println("\nF2 1     -> \t"+ f2.showVec());
+        System.out.println("F2 2     -> \t"+ f22.showVec());
 
-        System.out.println("\nresult    = \t"+ f2.showVec());
+        f2.multiply(f22);
+        System.out.println("\nResult    = \t"+ f2.showVec());
 
         // System.out.println("\nevaluate    = \t"+ f2.evaluate(1));
 
-        // Forma3 f3 = new Forma3(ceVec);
-        // System.out.println(f3.showList());
+        // ========== Forma3 ==========
+        Forma3 f3 = new Forma3(ceVec);
+        Forma3 f32 = new Forma3(ceVec2);
+
+        System.out.println("\nF3 1      -> \t"+f3.showList());
+        System.out.println("F3 2      -> \t"+f32.showList());
+
+        f3.multiply(f32);
+        System.out.println("\nResult    = \t"+ f3.showList());
+
+
 
 
     } 
