@@ -32,7 +32,8 @@ public class Forma3 {
     // deleteTerms
 
     public boolean deleteTerms(int exp) {
-        Node p = Punta, y=null;
+
+        Node p = Punta, y = null;
         while (p != null) {
 
             if (p.getExp() == exp) {
@@ -48,7 +49,6 @@ public class Forma3 {
                 return true;
             }
 
-
             y = p;
             p = p.getLiga();
         }
@@ -58,7 +58,8 @@ public class Forma3 {
 
     // addition
     public void addition(Forma3 list) {
-        Node A,B;
+
+        Node A, B;
         Forma3 C = new Forma3();
         if (this.size() > list.size()) {
             A = Punta;
@@ -196,7 +197,6 @@ public class Forma3 {
         String output = isEmpty() ? "Empty list" : "", next;
 
         while (p != null) {
-            // output += " | " + p.getLigaData() + p.getLigaLiga() == null ? " / " : " | -> ";
             next = p.getLiga() == null ? " / " : " ] -> ";
             output += "[ " + p.getCoe() + ", " + p.getExp() + next;
             p = p.getLiga();
@@ -207,8 +207,7 @@ public class Forma3 {
     public String sortByLigament(boolean sortAsc) { // sort the list
         // if the list cant be sorted, exit from the method
         if (isEmpty() || size() == 1) {
-            return "The list can't be sorted.";
-            
+            return "The list can't be sorted."; 
         }
 
         Node p = Punta, q, qNext=null, qPrevious = null;

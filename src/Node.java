@@ -8,7 +8,6 @@ public class Node {
         this.liga = null;
     }
 
-
     public int getCoe() {
         return coe;
     }
@@ -27,6 +26,4 @@ public class Node {
     public void setLiga(Node liga) {
         this.liga = liga;
     }
-
-
 }

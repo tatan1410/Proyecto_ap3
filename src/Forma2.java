@@ -72,7 +72,6 @@ public class Forma2 {
                 }
 
                 vec = newVec;
-
                 return true;
             } 
         }

@@ -7,7 +7,6 @@ public class Polinomio {
     private Forma2 f2;
     private Forma3 f3;
 
-    
     // =========== Constructor ===========
     public Polinomio(String polinomio) {
         int[] ceVec = convertToCeVec(polinomio);
@@ -15,8 +14,7 @@ public class Polinomio {
         f2 = new Forma2(ceVec);
         f3 = new Forma3(ceVec);
     }
-
-    
+ 
     // =========== Math ===========
     public void additionPolinom(Polinomio x) {
         f1.addition(x.getF1());
@@ -257,6 +255,7 @@ public class Polinomio {
 
         return s;
     }
+    
     // =========== Getters and Setters ===========
     public Forma1 getF1() {
         return f1;

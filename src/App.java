@@ -26,10 +26,9 @@ public class App {
             polinomios.add(new Polinomio(pol));
         }
 
-        
         while (true) {
             
-            System.out.println( "\n\n"+menu() );
+            System.out.println( "\n\n" + menu() );
             opt = read.nextInt();
 
             switch (opt) {
@@ -37,9 +36,10 @@ public class App {
                 case 1: // ingresar polinomios
 
                     try {
-                        String nuevoPolinomio = read.nextLine();
+                        String nuevoPolinomio = read.next();
                         Polinomio add = new Polinomio(nuevoPolinomio);
                         polinomios.add(add);
+                        System.out.println("Polinomio añadido.");
 
                     } catch (Exception e) {
                         System.out.println("Polinomio invalido.");
@@ -160,8 +160,9 @@ public class App {
             "\n6. Eliminar del polinomio" +
             "\n7. Seleccionar polinomio." +
             "\n0. Salir." +
-            "\nOpcion: \s" );
-        }
+            "\nOpcion: \s" 
+        );
+    }
 
     public static String operaciones() {
         return (
@@ -171,7 +172,8 @@ public class App {
             "\n2. Restar un polinomio." +
             "\n3. Multiplicar." +
             "\n0. Salir." +
-            "\nOpcion: \s" );
+            "\nOpcion: \s"
+        );
     }
 
     public static String state() {
