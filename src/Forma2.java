@@ -133,7 +133,6 @@ public class Forma2 {
         int i = 1, j = 1, k = 1;
         
         while (i <= A.length-1) {
-            j = 1;
             while (j <= B.length-1) {
                 if (A[i+1] == B[j+1]) {
                     if ((A[i] + B[j]) != 0) {
@@ -152,8 +151,12 @@ public class Forma2 {
                     C[k] = B[j];
                     C[k+1] = B[j+1];
                     k += 2; j += 2;
-
                 }
+            }
+            if ( !(j <= B.length-1) ) {
+                C[k] = A[i];
+                C[k+1] = A[i+1];
+                k += 2; i += 2;
             }
         }
         C[0] = (k-1)/2; // n term
