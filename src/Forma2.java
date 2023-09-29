@@ -152,7 +152,8 @@ public class Forma2 {
                     k += 2; j += 2;
                 }
             }
-            if ( !(j <= B.length-1) ) {
+
+            if ( !(j <= B.length-1) && !(i >= A.length) ) {
                 C[k] = A[i];
                 C[k+1] = A[i+1];
                 k += 2; i += 2;

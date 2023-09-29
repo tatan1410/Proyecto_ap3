@@ -143,6 +143,16 @@ public class Forma1 {
         du = duC;
     }
 
+    // CONVERTIR
+
+    // public void convert() {
+
+    //     int vecf1 = f1.getVec();
+
+    //         int[] C = new int[vecf1[0] + this.vec[0] + 2];
+
+    // }
+
     // evaluar
     public int evaluate(int x) {
         int res = 0;

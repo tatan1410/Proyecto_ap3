@@ -34,6 +34,10 @@ public class Polinomio {
         f3.multiply(x.getF3());
     }
 
+    // public void convertPoli(Polinomio x) {
+    //     f1.convert(x.getF1());
+    // }
+
     public boolean addTerm(int c, int e) {
 
         boolean s = f1.addTerms(c, e);

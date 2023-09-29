@@ -72,17 +72,17 @@ public class App {
                     } 
 
                     if (mathOpt == 1) {
-                        System.out.print("Seleccione el polinomio con el cual lo desea sumar:\s");
+                        System.out.print("Seleccione el polinomio con el cual lo desea sumar: ");
                         auxP = read.nextInt()-1;
-                        polinomios.get(p).additionPolinom( polinomios.get(auxP) );
+                        polinomios.get(p).additionPolinom( polinomios.get(auxP) ); // f1 a f3
 
                     } else if (mathOpt == 2) {
-                        System.out.print("Seleccione el polinomio con el cual lo desea restar:\s");
+                        System.out.print("Seleccione el polinomio con el cual lo desea restar: ");
                         auxP = read.nextInt()-1;
                         polinomios.get(p).substractPolinom( polinomios.get(auxP) );
 
                     } else if (mathOpt == 3) {
-                        System.out.print("Seleccione el polinomio con el cual lo desea multiplicar:\s");
+                        System.out.print("Seleccione el polinomio con el cual lo desea multiplicar: ");
                         auxP = read.nextInt()-1;
                         polinomios.get(p).multiplyPolinom( polinomios.get(auxP) );
 
@@ -135,6 +135,10 @@ public class App {
 
                     break;
 
+                // case 8:
+                //     polinomios.get(p).con.additionPolinom( polinomios.get(auxP) ); // f1 a f3
+
+
                 case 0: // exit
                     read.close();
                     System.exit(0);
@@ -160,7 +164,7 @@ public class App {
             "\n6. Eliminar del polinomio" +
             "\n7. Seleccionar polinomio." +
             "\n0. Salir." +
-            "\nOpcion: \s" 
+            "\nOpcion: " 
         );
     }
 
@@ -172,7 +176,7 @@ public class App {
             "\n2. Restar un polinomio." +
             "\n3. Multiplicar." +
             "\n0. Salir." +
-            "\nOpcion: \s"
+            "\nOpcion: "
         );
     }
 
